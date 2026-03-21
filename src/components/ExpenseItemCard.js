@@ -8,22 +8,25 @@ const ExpenseItemCard = ({item}) => {
       <View style={tailwind`flex-row items-center`}>
             {/*Item Icon*/}
             <View style={tailwind`w-12 h-12 rounded-xl bg-gray-100 justify-center items-center mr-4`}>
-                <Text>{"☕"}</Text>
+                <Text>{item.icon}</Text>
             </View>
             {/*Item Name*/}
             <View>
-                <Text style={tailwind`text-base font-bold text-gray-800`}>{"Coffee"}</Text>
+                <Text style={tailwind`text-base font-bold text-gray-800`}>{item.title}</Text>
                 {/*Item Category*/}
-                <View style={tailwind`mt-1 px-2 py-1 rounded-lg self-start bg-orange-400`}>
-                    <Text style={tailwind`text-xs font-bold text-gray-700`}>{"Food and drinks"}</Text>
+                <View style={[
+                    tailwind`mt-1 px-2 py-1 rounded-lg self-start bg-orange-400`,
+                    {backgroundColor: item.color}
+                ]}>
+                    <Text style={tailwind`text-xs font-bold text-gray-700`}>{item.category}</Text>
                 </View>
             </View>
        
       </View>
         {/*Item Info- cost and date*/}
             <View style={tailwind`items-end`}>
-                <Text style={tailwind`text-base font-bold text-black`}>{"100$"}</Text>
-                <Text style={tailwind`text-xs text-gray-500 mt-1`}>{"21-03-2026"}</Text>
+                <Text style={tailwind`text-base font-bold text-black`}>{item.amount}</Text>
+                <Text style={tailwind`text-xs text-gray-500 mt-1`}>{item.date}</Text>
             </View>
     </View>
   )
