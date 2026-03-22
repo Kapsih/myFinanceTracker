@@ -1,19 +1,28 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Alert } from 'react-native'
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import tailwind from 'twrnc'
-const Create = () => {
+const Create = ({navigation, route}) => {
 const [amount,setAmount] = useState(null);
 const [title,setTitle] = useState("");
+const [category,setCategory] = useState({});
 
 const handleAddExpense = ()=>
   {
-    if(!amount || !title){
+    if(!amount || !title || !category){
       console.log("All fields are required");
       Alert.alert("All fields are required");
       return;
     }
-    console.log("amount", amount);
-    console.log("title", title);
+  };
+
+    useEffect(()=> {
+    if(route.params?.category){
+      setCategory(route.params?.category)
+    }
+  },[route.params?.category])
+
+  const handleCategoryInput = () => {
+      navigation.navigate("Category");
   }
 
   return (
@@ -52,10 +61,13 @@ const handleAddExpense = ()=>
           <Text style={tailwind`text-xl font-semibold text-gray-600 mb-2`}>
             Category
           </Text>
-          <Pressable style={tailwind`border border-gray-400 p-4 rounded-xl flex-row justify-between items-center`}>
+          <Pressable 
+          style={tailwind`border border-gray-400 p-4 rounded-xl flex-row justify-between items-center`}
+          onPress={handleCategoryInput}
+          >
             <View style={tailwind`flex-row items-center`}>
-              <Text style={tailwind`text-2xl mr-3`}>🍜</Text>
-              <Text style={tailwind`text-lg`}>{"Food"}</Text>
+              <Text style={tailwind`text-2xl mr-3`}>{category.icon || "🍜"}</Text>
+              <Text style={tailwind`text-lg`}>{category.name || "Food"}</Text>
             </View>
             <Text style={tailwind`text-2xl`}>&gt;</Text>
           </Pressable>

@@ -3,7 +3,8 @@ import React from 'react'
 import tailwind from 'twrnc'
 
 const ExpenseItemCard = ({item}) => {
-  return (
+    
+  return (  
     <View style={tailwind`bg-white rounded-2xl p-4 mx-5 mb-3 flex-row justify-between items-center shadow-sm`}>
       <View style={tailwind`flex-row items-center`}>
             {/*Item Icon*/}
