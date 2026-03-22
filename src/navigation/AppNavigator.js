@@ -3,7 +3,6 @@ import Home from "../screens/Home";
 import Create from "../screens/Create";
 import Insights from "../screens/Insights";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Profile from "../screens/Profile";
 import Category from "../screens/Category";
 
 const Tab = createBottomTabNavigator();

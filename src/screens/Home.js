@@ -1,14 +1,15 @@
-import { View, Text, Button, StyleSheet, FlatList } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 
 import tailwind from 'twrnc'
 import EmptyList from '../components/EmptyList'
 import ExpenseItemCard from '../components/ExpenseItemCard'
-import { expensesData } from '../../constants'
+import { useExpense } from '../context/ExpenseContext'
 
 
 export default function Home({ navigation }) {
 
-  const totalAmt = expensesData.reduce((sum,item)=> sum + item.amount, 0);
+  const {expenses} = useExpense();
+  const totalAmt = expenses.reduce((sum,item)=> sum + item.amount, 0);
 
   return (
     <View style={tailwind`flex-1`}>
@@ -19,11 +20,11 @@ export default function Home({ navigation }) {
 
       <View style={tailwind`bg-black rounded-3xl p-6 my-5 mx-5 items-center shadow-lg`}>
         <Text style={tailwind`text-base text-gray-400`}>Spent so far</Text>
-        <Text style={tailwind`text-base text-white text-4xl font-bold mt-2 `}>{totalAmt.toFixed(2)}</Text>
+        <Text style={tailwind`text-base text-white text-4xl font-bold mt-2 `}>{"₹ " + totalAmt.toFixed(2)}</Text>
       </View>
 
       <FlatList
-        data = {expensesData}
+        data = {expenses}
         renderItem = {({item})=> <ExpenseItemCard item={item}/>}
         keyExtractor = {(item)=> item.id}
         contentContainerStyle = {{paddingBottem : 20}}
@@ -31,7 +32,6 @@ export default function Home({ navigation }) {
       >
 
       </FlatList>
-      {/*<Button title='Go to Profile'  onPress={() => navigation.navigate("Profile")}/>*/}
     </View>
   )
 }

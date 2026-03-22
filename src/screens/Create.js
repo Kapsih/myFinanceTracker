@@ -1,25 +1,39 @@
 import { StyleSheet, Text, View, ScrollView, TextInput, Pressable, Alert } from 'react-native'
 import { useState, useEffect } from 'react';
 import tailwind from 'twrnc'
-const Create = ({navigation, route}) => {
-const [amount,setAmount] = useState(null);
-const [title,setTitle] = useState("");
-const [category,setCategory] = useState({});
+import { useExpense } from '../context/ExpenseContext';
+import { CATEGORIES } from '../../constants';
 
-const handleAddExpense = ()=>
+
+const Create = ({navigation, route}) => 
   {
-    if(!amount || !title || !category){
-      console.log("All fields are required");
-      Alert.alert("All fields are required");
-      return;
-    }
+    const [amount,setAmount] = useState(null);
+    const [title,setTitle] = useState("");
+    const [category,setCategory] = useState({});
+
+    const {addExpense} = useExpense()
+    const handleAddExpense = ()=>
+    {
+        if(!amount || !title || !category)
+        {
+            Alert.alert("All fields are required");
+            return;
+        }
+
+        addExpense({
+          title,
+          amount,
+          category
+        });
+
+        navigation.goBack();
   };
 
     useEffect(()=> {
-    if(route.params?.category){
-      setCategory(route.params?.category)
-    }
-  },[route.params?.category])
+      if(route.params?.category){
+          setCategory(route.params?.category)
+        }
+    },[route.params?.category])
 
   const handleCategoryInput = () => {
       navigation.navigate("Category");

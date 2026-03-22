@@ -2,12 +2,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import AppNavigator from './src/navigation/AppNavigator';
+import { ExpenseProvider } from './src/context/ExpenseContext';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <AppNavigator></AppNavigator>
-    </NavigationContainer>
+    <ExpenseProvider>
+      <NavigationContainer>
+        <AppNavigator></AppNavigator>
+      </NavigationContainer>
+    </ExpenseProvider>
+    
   );
 }
 

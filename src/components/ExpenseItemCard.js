@@ -3,7 +3,7 @@ import React from 'react'
 import tailwind from 'twrnc'
 
 const ExpenseItemCard = ({item}) => {
-    
+    console.log(item);
   return (  
     <View style={tailwind`bg-white rounded-2xl p-4 mx-5 mb-3 flex-row justify-between items-center shadow-sm`}>
       <View style={tailwind`flex-row items-center`}>
@@ -26,7 +26,7 @@ const ExpenseItemCard = ({item}) => {
       </View>
         {/*Item Info- cost and date*/}
             <View style={tailwind`items-end`}>
-                <Text style={tailwind`text-base font-bold text-black`}>{item.amount}</Text>
+                <Text style={tailwind`text-base font-bold text-black`}>{"₹ " + item.amount}</Text>
                 <Text style={tailwind`text-xs text-gray-500 mt-1`}>{item.date}</Text>
             </View>
     </View>
